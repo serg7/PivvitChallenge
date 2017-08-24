@@ -8,9 +8,7 @@ class PurchaseTable extends React.Component
 
     renderRows()
     {
-        //debugger;
         return this.props.purchases.map(purchase => {
-            console.log(purchase);
             return <PurchaseTableRow purchase={purchase} />
         });
     }
@@ -52,7 +50,7 @@ class PurchaseTableRow extends React.Component
                 <td>{this.props.purchase.title}</td>
                 <td>{this.props.purchase.quantity}</td>
                 <td>{this.props.purchase.price}</td>
-                <td>total</td>
+                <td>{this.props.purchase.price * this.props.purchase.quantity}</td>
             </tr>
         );
     }
@@ -90,22 +88,8 @@ class PurchasesList extends React.Component
                 });
 
                 this.setState({purchases: purchases});
-                console.log(this.state.purchases);
             });
-
     }
-
-    // renderPurchases()
-    // {
-    //     return this.state.purchases.map((purchase) => {
-    //         return (
-    //             <div>
-    //                 <p>{purchase.id}</p>
-    //                 <p>{purchase.title}</p>
-    //             </div>
-    //         );
-    //     });
-    // }
 
     render() {
         return (
