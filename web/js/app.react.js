@@ -16,8 +16,8 @@ class PurchaseTable extends React.Component
     render()
     {
         return (
-            <table>
-                <thead>
+            <table className="table table-striped">
+                <thead className="thead-inverse">
                     <tr>
                         <th>Purchase Id</th>
                         <th>Offering Title</th>
@@ -55,6 +55,46 @@ class PurchaseTableRow extends React.Component
         );
     }
 }
+
+
+class PurchaseForm extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
+    }
+
+    createPurchase()
+    {
+
+    }
+
+    render()
+    {
+        return(
+            <div>
+                <h3>Create new purchase</h3>
+                <form onSubmit={this.createPurchase.bind(this)}>
+                    <div className="form-group">
+                        <label for="customerName">Customer Name</label>
+                        <input className="form-control" type="text" ref="customerName" id="customerName" />
+                    </div>
+
+                    <div className="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input className="form-control" type="number" ref="quantity" id="quantity" />
+                    </div>
+
+                    <button className="btn btn-info">Create</button>
+                </form>
+            </div>
+        )
+    }
+}
+
+
+
+
 
 class PurchasesList extends React.Component
 {
@@ -94,8 +134,10 @@ class PurchasesList extends React.Component
     render() {
         return (
             <div>
-                <h2>Purchases list</h2>
+                <h3>Purchases list</h3>
                 <PurchaseTable purchases={this.state.purchases} />
+                <hr/>
+                <PurchaseForm />
             </div>
         );
     }
