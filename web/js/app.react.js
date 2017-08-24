@@ -1,16 +1,65 @@
-var Purchase = React.createClass({
-    render: function() {
+
+class PurchaseTable extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
+    }
+
+    renderRows()
+    {
+        //debugger;
+        return this.props.purchases.map(purchase => {
+            console.log(purchase);
+            return <PurchaseTableRow purchase={purchase} />
+        });
+    }
+
+    render()
+    {
         return (
-            <div>
-                Purchase
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Purchase Id</th>
+                        <th>Offering Title</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {this.renderRows()}
+                </tbody>
+            </table>
         );
     }
-});
+}
+
+class PurchaseTableRow extends React.Component
+{
+    constructor(props)
+    {
+        super(props)
+    }
+
+    render()
+    {
+        return (
+            <tr>
+                <td>{this.props.purchase.id}</td>
+                <td>{this.props.purchase.title}</td>
+                <td>{this.props.purchase.quantity}</td>
+                <td>{this.props.purchase.price}</td>
+                <td>total</td>
+            </tr>
+        );
+    }
+}
 
 class PurchasesList extends React.Component
 {
-
     constructor()
     {
         super();
@@ -46,23 +95,23 @@ class PurchasesList extends React.Component
 
     }
 
-    renderPurchases()
-    {
-        return this.state.purchases.map((purchase) => {
-            return (
-                <div>
-                    <p>{purchase.id}</p>
-                    <p>{purchase.title}</p>
-                </div>
-            );
-        });
-    }
+    // renderPurchases()
+    // {
+    //     return this.state.purchases.map((purchase) => {
+    //         return (
+    //             <div>
+    //                 <p>{purchase.id}</p>
+    //                 <p>{purchase.title}</p>
+    //             </div>
+    //         );
+    //     });
+    // }
 
     render() {
         return (
             <div>
                 <h2>Purchases list</h2>
-                {this.renderPurchases()}
+                <PurchaseTable purchases={this.state.purchases} />
             </div>
         );
     }
