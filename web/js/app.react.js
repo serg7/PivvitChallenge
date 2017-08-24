@@ -8,33 +8,57 @@ var Purchase = React.createClass({
     }
 });
 
-var PurchasesList = React.createClass({
+class PurchasesList extends React.Component
+{
 
-    componentDidMount: function() {
+    constructor()
+    {
+        super();
+        this.state = {
+            purchases: []
+        };
+    }
+
+    componentDidMount()
+    {
         this.loadPurchases();
-        setInterval(this.loadPurchases, 5000);
-    },
+    }
 
-    loadPurchases: function() {
+    loadPurchases()
+    {
 
-        $.ajax({
-            url: '/purchases',
-            success: function (data) {
-                this.setState({purchases: data});
-            }.bind(this)
-        });
-    },
+        fetch('/purchases')
+            .then(results => {
+                if (results.headers.get("content-type")
+                    && results.headers.get("content-type").toLowerCase().indexOf("application/json") >= 0) {
+                    return results.json();
+                } else {
+                    throw new TypeError()
+                }
+            }).then(data => {
+                let purchases = data.map((purchase) => {
+                    return purchase;
+                });
+
+                this.setState({purchases: purchases});
+                console.log(this.state.purchases);
+            });
+
+    }
 
     renderPurchases()
     {
-        this.loadPurchases();
+        return this.state.purchases.map((purchase) => {
+            return (
+                <div>
+                    <p>{purchase.id}</p>
+                    <p>{purchase.title}</p>
+                </div>
+            );
+        });
+    }
 
-        // return this.state.purchases.map((purchase) => {
-        //     return <p>purchase</p>
-        // });
-    },
-
-    render: function() {
+    render() {
         return (
             <div>
                 <h2>Purchases list</h2>
@@ -42,6 +66,6 @@ var PurchasesList = React.createClass({
             </div>
         );
     }
-});
+}
 
 ReactDOM.render(<PurchasesList />, document.getElementById('app'));
