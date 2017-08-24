@@ -1,0 +1,9 @@
+_api_purchases:
+    path:     /purchases
+    defaults: { _controller: PivvitApiBundle:Purchase:purchases }
+    methods: [GET]
+
+_api_create_purchase:
+    path:     /purchase
+    defaults: { _controller: PivvitApiBundle:Purchase:create }
+    methods: [POST]

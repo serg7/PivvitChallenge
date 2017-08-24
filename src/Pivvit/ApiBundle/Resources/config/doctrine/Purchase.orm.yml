@@ -1,0 +1,27 @@
+Pivvit\ApiBundle\Entity\Purchase:
+    type: entity
+    table: purchases
+    repositoryClass: Pivvit\ApiBundle\Repository\PurchaseRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        customerName:
+            type: string
+            length: '100'
+        quantity:
+            type: integer
+
+    manyToOne:
+        offering:
+            targetEntity: Pivvit\ApiBundle\Entity\Offering
+            cascade: {  }
+            #mappedBy: offering
+            inversedBy: purchases
+            joinColumn:
+                offering_id:
+                      referencedColumnName: id
+    lifecycleCallbacks: {  }

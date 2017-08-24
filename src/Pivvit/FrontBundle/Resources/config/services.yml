@@ -1,0 +1,4 @@
+services:
+#    pivvit_front.example:
+#        class: Pivvit\FrontBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

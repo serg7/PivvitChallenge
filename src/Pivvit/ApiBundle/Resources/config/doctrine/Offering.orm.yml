@@ -1,0 +1,24 @@
+Pivvit\ApiBundle\Entity\Offering:
+    type: entity
+    table: offerings
+    repositoryClass: Pivvit\ApiBundle\Repository\OfferingRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: '100'
+        price:
+            type: float
+
+    oneToMany:
+        purchases:
+            targetEntity: Pivvit\ApiBundle\Entity\Purchase
+            mappedBy: offering
+            #orderBy: { 'date': 'ASC' }
+
+    lifecycleCallbacks: {  }
